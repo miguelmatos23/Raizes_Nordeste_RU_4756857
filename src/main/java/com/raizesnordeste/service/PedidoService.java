@@ -32,7 +32,7 @@ public class PedidoService {
     @Transactional
     public Pedido criarPedido(PedidoRequest request) {
         Usuario cliente = usuarioRepository.findById(request.clienteId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente nÃ£o encontrado"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado"));
 
         Pedido pedido = new Pedido();
         pedido.setCliente(cliente);
@@ -44,7 +44,7 @@ public class PedidoService {
 
         for (PedidoRequest.ItemRequest itemReq : request.itens) {
             Produto produto = produtoRepository.findById(itemReq.produtoId)
-                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto nÃ£o encontrado"));
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Produto não encontrado"));
 
             if (produto.getEstoque() < itemReq.quantidade) {
                 throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY,
@@ -79,7 +79,7 @@ public class PedidoService {
 
     public Pedido buscarPorId(UUID id) {
         return pedidoRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido nÃ£o encontrado"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido não encontrado"));
     }
 
     public Pedido prepararPedido(UUID id) {
@@ -91,21 +91,21 @@ public class PedidoService {
 
     public Pedido marcarPronto(UUID id) {
         Pedido pedido = buscarPorId(id);
-        validarTransicao(pedido, StatusPedido.EM_PREPARO, "Pedido ainda nÃ£o estÃ¡ pronto");
+        validarTransicao(pedido, StatusPedido.EM_PREPARO, "Pedido ainda não está pronto");
         pedido.setStatusPedido(StatusPedido.AGUARDANDO_ENTREGADOR);
         return pedidoRepository.save(pedido);
     }
 
     public Pedido enviarParaEntrega(UUID id) {
         Pedido pedido = buscarPorId(id);
-        validarTransicao(pedido, StatusPedido.AGUARDANDO_ENTREGADOR, "Pedido nÃ£o estÃ¡ aguardando entregador");
+        validarTransicao(pedido, StatusPedido.AGUARDANDO_ENTREGADOR, "Pedido não está aguardando entregador");
         pedido.setStatusPedido(StatusPedido.SAIU_PARA_ENTREGA);
         return pedidoRepository.save(pedido);
     }
 
     public Pedido finalizarEntrega(UUID id) {
         Pedido pedido = buscarPorId(id);
-        validarTransicao(pedido, StatusPedido.SAIU_PARA_ENTREGA, "Pedido ainda nÃ£o saiu para entrega");
+        validarTransicao(pedido, StatusPedido.SAIU_PARA_ENTREGA, "Pedido ainda não saiu para entrega");
         pedido.setStatusPedido(StatusPedido.ENTREGUE);
         return pedidoRepository.save(pedido);
     }
@@ -116,10 +116,10 @@ public class PedidoService {
 
         if (pedido.getStatusPedido() == StatusPedido.ENTREGUE) {
             throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY,
-                    "Pedido jÃ¡ entregue, entre em contato com a loja");
+                    "Pedido já entregue, entre em contato com a loja");
         }
         if (pedido.getStatusPedido() == StatusPedido.CANCELADO) {
-            throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "Pedido jÃ¡ estÃ¡ cancelado");
+            throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "Pedido já está cancelado");
         }
 
         // devolve o estoque de cada item

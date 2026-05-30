@@ -134,7 +134,7 @@ AGUARDANDO_PAGAMENTO → PAGO → EM_PREPARO → AGUARDANDO_ENTREGADOR → SAIU_
 ## Estrutura do Projeto
 
 ```
-com.miguel.raizesnordeste
+com.raizesnordeste
 ├── config/          → Configurações (Security, Swagger, Admin seed)
 ├── controller/      → Endpoints REST
 ├── dto/             → Objetos de requisição
@@ -143,3 +143,10 @@ com.miguel.raizesnordeste
 ├── security/        → Autenticação customizada
 └── service/         → Regras de negócio
 ```
+
+## Coleção de Testes (Postman)
+
+A coleção de requisições prontas para testes no Postman está disponível na raiz do repositório como:
+- **`Raizes_Nordeste.postman_collection.json`**
+
+Para utilizar, basta abrir o Postman, clicar em **Import** e selecionar o arquivo JSON acima. Os endpoints contam com autenticação básica previamente configurada utilizando o usuário administrador inicial.

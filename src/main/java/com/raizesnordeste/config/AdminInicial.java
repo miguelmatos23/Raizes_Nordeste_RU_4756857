@@ -20,7 +20,7 @@ public class AdminInicial implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        // cria o admin apenas na primeira execuÃ§Ã£o
+        // cria o admin apenas na primeira execução
         if (repository.findByEmail("admin@raizesnordeste.com").isEmpty()) {
             Usuario admin = new Usuario();
             admin.setNome("Administrador");
@@ -29,7 +29,7 @@ public class AdminInicial implements CommandLineRunner {
             admin.setPerfil(Perfil.ADMIN);
 
             repository.save(admin);
-            System.out.println("UsuÃ¡rio admin criado com sucesso");
+            System.out.println("Usuário admin criado com sucesso");
         }
     }
 }

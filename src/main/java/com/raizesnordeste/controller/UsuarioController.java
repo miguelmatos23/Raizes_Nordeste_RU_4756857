@@ -14,7 +14,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/usuario")
-@Tag(name = "UsuÃ¡rio")
+@Tag(name = "Usuário")
 public class UsuarioController {
 
     private final UsuarioService service;
@@ -25,7 +25,7 @@ public class UsuarioController {
 
     @PostMapping("/registrar")
     @PreAuthorize("hasAnyRole('ADMIN', 'GERENTE')")
-    @Operation(summary = "Registra um novo usuÃ¡rio")
+    @Operation(summary = "Registra um novo usuário")
     public ResponseEntity<Void> registrar(@RequestBody UsuarioRequest request) {
         service.registrar(request);
         return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -33,14 +33,14 @@ public class UsuarioController {
 
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole('ADMIN', 'GERENTE', 'ATENDENTE')")
-    @Operation(summary = "Busca usuÃ¡rio por ID")
+    @Operation(summary = "Busca usuário por ID")
     public ResponseEntity<Usuario> buscar(@PathVariable UUID id) {
         return ResponseEntity.ok(service.buscarPorId(id));
     }
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAnyRole('ADMIN', 'GERENTE')")
-    @Operation(summary = "Remove um usuÃ¡rio")
+    @Operation(summary = "Remove um usuário")
     public ResponseEntity<Void> deletar(@PathVariable UUID id) {
         service.deletar(id);
         return ResponseEntity.noContent().build();

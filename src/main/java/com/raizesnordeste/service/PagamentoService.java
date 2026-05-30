@@ -24,10 +24,10 @@ public class PagamentoService {
     @Transactional
     public Pagamento efetuarPagamento(UUID pedidoId, String formaPagamento) {
         Pedido pedido = pedidoRepository.findById(pedidoId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido nÃ£o encontrado"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido não encontrado"));
 
         if (pedido.getStatusPedido() != StatusPedido.AGUARDANDO_PAGAMENTO) {
-            throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "Pedido nÃ£o estÃ¡ aguardando pagamento");
+            throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "Pedido não está aguardando pagamento");
         }
 
         Pagamento pagamento = new Pagamento();

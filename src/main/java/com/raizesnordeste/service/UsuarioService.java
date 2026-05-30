@@ -24,7 +24,7 @@ public class UsuarioService {
 
     public Usuario registrar(UsuarioRequest request) {
         if (repository.existsByEmail(request.email)) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Email jÃ¡ cadastrado");
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Email já cadastrado");
         }
 
         Usuario usuario = new Usuario();
@@ -38,12 +38,12 @@ public class UsuarioService {
 
     public Usuario buscarPorId(UUID id) {
         return repository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "UsuÃ¡rio nÃ£o encontrado"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));
     }
 
     public void deletar(UUID id) {
         if (!repository.existsById(id)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "UsuÃ¡rio nÃ£o encontrado");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado");
         }
         repository.deleteById(id);
     }

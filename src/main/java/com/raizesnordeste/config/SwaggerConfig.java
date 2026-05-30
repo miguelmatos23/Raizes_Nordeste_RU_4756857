@@ -8,9 +8,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @OpenAPIDefinition(
         info = @Info(
-                title = "RaÃ­zes do Nordeste - API",
+                title = "Raízes do Nordeste - API",
                 version = "1.0",
-                description = "API de gerenciamento de pedidos da Rede RaÃ­zes do Nordeste",
+                description = "API de gerenciamento de pedidos da Rede Raízes do Nordeste",
                 contact = @Contact(
                         name = "Miguel de Matos Cavalcante Leite",
                         email = "miguelmatos766@gmail.com"

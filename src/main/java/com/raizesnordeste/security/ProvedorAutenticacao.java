@@ -26,12 +26,12 @@ public class ProvedorAutenticacao implements AuthenticationProvider {
         String email = authentication.getName();
         String senha = authentication.getCredentials().toString();
 
-        // mesma mensagem nos dois casos pra nÃ£o revelar se o email existe ou nÃ£o
+        // mesma mensagem nos dois casos pra não revelar se o email existe ou não
         Usuario usuario = repository.findByEmail(email)
-                .orElseThrow(() -> new BadCredentialsException("Credenciais invÃ¡lidas"));
+                .orElseThrow(() -> new BadCredentialsException("Credenciais inválidas"));
 
         if (!encoder.matches(senha, usuario.getSenha())) {
-            throw new BadCredentialsException("Credenciais invÃ¡lidas");
+            throw new BadCredentialsException("Credenciais inválidas");
         }
 
         return new AutenticacaoCustomizada(usuario);
