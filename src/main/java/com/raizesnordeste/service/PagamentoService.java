@@ -35,7 +35,7 @@ public class PagamentoService {
         pagamento.setFormaPagamento(FormaPagamento.valueOf(formaPagamento));
         pagamento.setStatusPagamento(StatusPagamento.APROVADO);
         pagamento.setValor(pedido.getValorTotal());
-        pagamento.setCodigoTransacao(UUID.randomUUID().toString());
+        pagamento.setCodigoTransacao("TX-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase());
 
         pedido.setStatusPedido(StatusPedido.PAGO);
         pedidoRepository.save(pedido);

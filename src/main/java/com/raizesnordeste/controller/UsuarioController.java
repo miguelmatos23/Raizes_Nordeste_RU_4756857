@@ -26,9 +26,9 @@ public class UsuarioController {
     @PostMapping("/registrar")
     @PreAuthorize("hasAnyRole('ADMIN', 'GERENTE')")
     @Operation(summary = "Registra um novo usuário")
-    public ResponseEntity<Void> registrar(@RequestBody UsuarioRequest request) {
-        service.registrar(request);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    public ResponseEntity<Usuario> registrar(@RequestBody UsuarioRequest request) {
+        Usuario usuario = service.registrar(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(usuario);
     }
 
     @GetMapping("/{id}")

@@ -2,6 +2,7 @@ package com.raizesnordeste.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -28,6 +29,13 @@ public class Pagamento {
     private Double valor;
 
     private String codigoTransacao;
+
+    private LocalDateTime dataPagamento;
+
+    @PrePersist
+    protected void onCreate() {
+        this.dataPagamento = LocalDateTime.now();
+    }
 
     public Pagamento() {
     }
@@ -78,5 +86,13 @@ public class Pagamento {
 
     public void setCodigoTransacao(String codigoTransacao) {
         this.codigoTransacao = codigoTransacao;
+    }
+
+    public LocalDateTime getDataPagamento() {
+        return dataPagamento;
+    }
+
+    public void setDataPagamento(LocalDateTime dataPagamento) {
+        this.dataPagamento = dataPagamento;
     }
 }

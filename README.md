@@ -8,7 +8,7 @@
 
 ## Sobre o Projeto
 
-API REST desenvolvida em **Java 17 + Spring Boot** para gerenciamento de pedidos da rede de restaurantes **Raízes do Nordeste**. O sistema suporta múltiplos canais de venda (App, Totem, Balcão, Web) e implementa controle de acesso baseado em perfis (RBAC).
+API REST desenvolvida em **Java 17 + Spring Boot** para gerenciamento de pedidos da rede de restaurantes **Raízes do Nordeste**. O sistema suporta múltiplos canais de venda (App, Totem, Balcão, Pickup, Web) e implementa controle de acesso baseado em perfis (RBAC).
 
 ## Tecnologias
 
@@ -72,7 +72,7 @@ A API utiliza **HTTP Basic Authentication**. Na primeira execução, é criado a
 ### Usuário (`/usuario`)
 | Método | Rota | Descrição |
 |---|---|---|
-| POST | `/usuario/registrar` | Registra novo usuário |
+| POST | `/usuario/registrar` | Cadastra novo usuário |
 | GET | `/usuario/{id}` | Busca usuário por ID |
 | DELETE | `/usuario/{id}` | Remove usuário |
 
@@ -113,6 +113,7 @@ AGUARDANDO_PAGAMENTO → PAGO → EM_PREPARO → AGUARDANDO_ENTREGADOR → SAIU_
 - `APP` — Aplicativo mobile
 - `TOTEM` — Totem de autoatendimento
 - `BALCAO` — Atendimento presencial
+- `PICKUP` — Retirada no balcão
 - `WEB` — Plataforma web
 
 ## Regras de Negócio
